@@ -10,7 +10,7 @@
 ![7 recipe 2](https://github.com/user-attachments/assets/4cf7bc4b-0f6f-45bb-8ad9-8123e27180d1)
 ![8 recipe history chat](https://github.com/user-attachments/assets/1360e4af-30bc-4800-b416-7def97362b0b)
 
-
+# Folder Structure
 ```
 Text2Sql
 ├─ .DS_Store
@@ -96,4 +96,5 @@ Text2Sql
    └─ top_level.txt
 
 ```
+
 
