@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+@import url('https://fonts.cdnfonts.com/css/coolvetica');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+}
+html{
+    scroll-behavior:smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    /* font-family: 'Coolvetica', sans-serif; */
+    height: 100vh !important;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+/* 
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255); */
+
+    
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav ul {    
+    font-family: "Roboto", sans-serif;
+    position:fixed !important;
+    z-index: 1000;
+    top: 0.5rem;
+
+    background: rgba(255, 255, 255, 0.214);
+    background: rgba(0, 0, 0, 0.214);
+    /* box-shadow: 0 4px 8px 0px rgba(103, 103, 103, 0.37); */
+    backdrop-filter: blur( 12px );
+    -webkit-backdrop-filter: blur( 12px );
+    border: 1px solid rgba(100, 100, 100, 0.349);
+
+    margin-top: 1.5rem;
+    border-radius: 30px;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    list-style: none;
+    padding: .5rem .5rem .5rem .5rem;
+    /* gap: 1.5rem; */
+    /* flex-wrap: wrap; */
+    /* align-content: space-around; */
+    /* background-color: #f5f5f5; optional for visibility */
+}
+
+/* LOGO container */
+nav ul .logo {
+    width: 35px;  /* set size of logo */
+    height: 35px;
+    margin-right: 0rem;
+    padding-left:1rem;
+}
+
+/* IMG inside the logo container */
+nav ul .logo img {
+    border-radius: 30%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color:inherit;
+}
+nav ul li a:hover{
+    text-decoration: underline;
+}
+nav ul .list{
+    margin: 0rem 3rem 0rem 1rem;
+}
+nav ul .list-four{
+    margin-right: 1rem;
+}
+.section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+}
+.section-two .content, .section-one .content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.section-two .content h1, .section-one .content h1{
+    font-family: 'Coolvetica', sans-serif;
+    text-align: center;
+    user-select: none;
+    font-weight: 300;
+}
+.section-one .content h1{
+    font-size: 6rem;
+    margin:6.5rem 11rem 2rem;
+}
+.section-two .content h1{
+    /* align-self: flex-start; */
+    font-size: 3.5rem;
+    padding:4.5rem 12rem 0rem;
+}
+
+
+
+.glowing-text {
+    color: white;
+    background: linear-gradient(90deg, rgb(122, 173, 255),rgb(36, 36, 255), rgb(158, 110, 255)); 
+    background: linear-gradient(90deg, rgb(254, 113, 61),rgb(226, 44, 226), rgb(135, 75, 255)); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-one .paragraph, .section-two .paragraph{
+    user-select: none;
+    text-align: center;
+    padding: 1rem 15rem 3rem;
+}
+.section-one .paragraph{
+    padding: 1rem 15rem 3rem;
+    /* color:blue; */
+}
+.section-two .content p{
+    text-align: center;
+    line-height: 2rem;
+    padding: 1rem 10rem 5rem;
+    line-height: 2.3rem;
+}
+.section-one .content button{
+    /* font-family: 'Coolvetica', sans-serif; */
+    transition: .2s;
+    /* font-family: "Roboto", sans-serif; */
+    cursor: pointer;
+    font-size: 1rem;
+    /* letter-spacing: .20rem; */
+    /* font-weight: 800; */
+    padding : .8rem 1.5rem;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    background-color: black;
+
+    /* border: 1px solid white; */
+    background-color: white;
+    color:black;
+    
+}
+.section-one .content button a{
+    text-decoration: none;
+    color : white;
+}
+
+.section-one .content button:hover{
+    background: linear-gradient(90deg, rgb(254, 113, 61),rgb(226, 44, 226), rgb(135, 75, 255)); 
+    /* background-color: white; */
+    /* color:white; */
+    /* border: 1px solid linear-gradient(90deg, rgb(254, 113, 61),rgb(226, 44, 226), rgb(135, 75, 255)); */
+}
+
+.section-two{
+    
+    /* transform: translate(2);  */
+    background-color: rgb(29, 29, 29);
+    background-color: transparent;
+
+    /* border: 2px solid rgb(54, 54, 54); */
+    
+
+    background-repeat:no-repeat;
+    background-size:cover;
+    margin: 7rem 12rem 3rem !important;
+    border-radius: 20px;
+    background-position: center center;
+    /* box-shadow: 8px 8px 0px 0px rgb(62, 62, 62); */
+    background-image: url('/static/images/orangebackground.jpg');
+    /* backdrop-filter: ; */
+    color: black;
+}
+
+
+
+.section-three{
+    margin: 6rem 12rem;
+    padding: 2rem;
+    background-color: rgb(27, 27, 27);
+    border-radius: 20px;
+}
+.section-three .content .prompt-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:5rem 2rem;
+}
+.section-three .content .prompt-content .left{
+    padding: 0rem 4rem 0rem 0rem;
+}
+.section-three .content .generated-content .left{
+    padding: 0rem 0rem 0rem 4rem;
+}
+
+.section-three .content .generated-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:5rem 2rem;
+}
+.section-three .content h2{ 
+    font-size: 2rem;
+    padding:0rem 0rem 1rem;
+}
+.section-three .content .prompt-content img{
+    flex-shrink: 1;
+    width: 700px;
+    height:100px;
+    border-radius: 20px;
+    user-select: none;
+}
+.section-three .content .generated-content img{
+    width: 490px;
+    height:155px;
+    border-radius: 20px;
+    user-select: none;
+    /* display: none; */
+}
+
+
+
+
+.section-four{
+    margin-top: 10rem;
+    background-color: rgb(26, 26, 26);
+    padding: 5rem 5rem;
+    color: rgb(255, 255, 255);
+    border-radius: 20px 20px 0px 0px;
+}
+.section-four footer span{
+    font-size: 3rem;;
+}
+.section-four{
+    flex-direction: column;
+}
+.section-four footer{
+    font-family: 'Coolvetica', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+}
+.section-four p{
+    margin-top: 3rem;
+    font-size: .8rem;
+}

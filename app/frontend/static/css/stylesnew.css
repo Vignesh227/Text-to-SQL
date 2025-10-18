@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+
+    /* font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500; */
+
+    
+    height: 95vh;
+    background-color: #ffffff;
+/*     
+    background-image: url('/static/background4.jpg');
+    /* filter: brightness(50%); */ /*
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.glowing-text {
+    /* font-size: 48px; */
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, rgb(0, 98, 255),rgb(36, 36, 255), rgb(158, 110, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* mix-blend-mode: screen; */
+}
+
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the screen */
+    z-index: -1; /* Sends the video to the background */
+}
+
+/* Content styling */
+.content {
+    /* position: relative; */
+    z-index: 1; /* Keeps text and inputs above the video */
+    /* Ensures text is visible */
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+h1 {
+    user-select: none;
+    margin: 2.5rem 15rem 0rem;
+    padding: 0rem 10rem;
+    font-size: 4rem;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(248, 248, 248);
+}
+.sub{
+    user-select: none;
+    color:rgb(250, 250, 250);
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin:.5rem 0rem 3rem;
+}
+
+.sub-heading-new{
+    transition: 1s;
+    opacity: 0;
+    /* animation: fadeInSubHead 0.7s ease-in-out; */
+    font-size: 0rem;
+}
+
+.chat-container {
+    width: 900px;
+    padding: 15px;
+    border-radius: 12px;
+    
+
+    background: rgba(1, 1, 1, 0.345);
+    /* box-shadow: 0px 8px 32px 8px rgba(77, 43, 180, 0.137); */
+    backdrop-filter: blur( 14px );
+    -webkit-backdrop-filter: blur( 14px );
+
+    border: 1px solid rgba(86, 86, 86, 0.498);
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+    padding: 15px;
+    border-radius: 10px;
+    background: transparent;
+    /* box-shadow: 0 8px 32px 0 rgba(77, 43, 180, 0.137);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(77, 43, 180, 0.031); */
+    overflow-y: auto;
+    transition: height 0.8s ease-in-out;
+}
+
+/* Expand when button is clicked */
+.chat-box.expanded {
+    height: 550px;
+}
+
+/* Common styling for messages */
+.message {
+    display: inline-block; /* Allow messages to shrink based on text */
+    max-width: 70%; /* Prevents messages from being too wide */
+    word-wrap: break-word; /* Ensures text wraps properly */
+    white-space: pre-wrap; /* Preserve line breaks */
+    padding: 1rem;
+    margin: .7rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0px 2px 10px rgba(77, 43, 180, 0.1);
+    animation: fadeIn 0.7s ease-in-out;
+    line-height: 1.8rem;
+
+    color: #ededed;
+}
+
+/* User messages on the right */
+.user-message {
+    background: rgba(44, 44, 255, 0.25);
+    backdrop-filter: blur( 20px );
+    -webkit-backdrop-filter: blur( 20px );
+    border-radius: 10px;
+    border: 1px solid rgba(91, 91, 255, 0.30);
+
+    align-self: flex-end; /* Aligns to the right */
+    text-align: left;
+
+
+    
+}
+
+/* Bot messages on the left */
+.bot-message {
+    
+    background: rgba(234, 8, 255, 0.135);
+    border: 1px solid rgba(239, 68, 255, 0.125);
+    align-self: flex-start; /* Aligns to the left */
+    text-align: left;
+    /* text-shadow: 0px 1px 2px rgba(0,0,0,0.1); */
+}
+
+
+
+.chat-input {
+    display: flex;
+    padding: 10px 0;
+}
+
+.chat-input input, .chat-input button {
+    padding: 0.75rem;
+    margin: 0rem 0rem ;
+    border: none;
+    /* border-radius: 12px; */
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+
+    
+}
+
+.chat-input input {
+    flex: 1;
+    background: rgba(7, 7, 7, 0.595);
+    border: 1px solid rgba(35, 35, 35, 0.595);
+    /* box-shadow: 0 2px 12px 0 rgba(113, 113, 113, 0.113); */
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    color: #ededed;
+
+    margin-left: 0.5rem;
+    border-radius: 12px 0px 0px 12px;
+}
+
+.chat-input button {
+    width: 4rem;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+    background: rgba(173, 55, 212, 0.664);
+    box-shadow: 0 2px 12px 0 rgba(26, 26, 26, 0.113);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    letter-spacing: .05rem;;
+
+    margin-right: 0.5rem;
+    border-radius: 0px 12px 12px 0px;
+}
+.chat-input button:hover {
+
+    color: rgb(255, 255, 255);
+  
+    background: rgba(140, 60, 166, 0.603);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}
+
+.arrow-icon {
+    width: 18px;
+    height: 16px;
+    /* object-fit: contain; */
+}   
+
+
+
+
+
+
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 8px;  /* Adjust scrollbar width */
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+    background: rgba(149, 149, 149, 0.194);  /* Light grey background */
+    border-radius: 10px;   /* Rounded corners */
+}
+
+/* Scrollbar Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background: rgba(130, 130, 130, 0.873);  /* Darker color for contrast */
+    border-radius: 10px;  /* Rounded scrollbar */
+}
+
+/* Scrollbar Thumb on Hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(181, 181, 181);  /* Even darker for hover effect */
+}
