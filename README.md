@@ -1,3 +1,16 @@
+# Home Page
+![1 home page new](https://github.com/user-attachments/assets/8c9bc0b8-48cd-46d6-a870-8fef99beb1c9)
+![2 what is](https://github.com/user-attachments/assets/8bfb49cd-c00b-482a-ab73-131bdaac42da)
+![3 sample](https://github.com/user-attachments/assets/b67fcb49-c32d-416c-9516-9b8f7dc4c935)
+
+# Chat Page
+![4 chat](https://github.com/user-attachments/assets/84157193-e4a2-49d9-b0f8-4cd214f7d60d)
+![5 hi there](https://github.com/user-attachments/assets/f9fe2a78-332d-4743-983f-2796b3a02166)
+![6 recipe](https://github.com/user-attachments/assets/c5bb4493-7c1d-4357-99b9-f85df7dd35c6)
+![7 recipe 2](https://github.com/user-attachments/assets/4cf7bc4b-0f6f-45bb-8ad9-8123e27180d1)
+![8 recipe history chat](https://github.com/user-attachments/assets/1360e4af-30bc-4800-b416-7def97362b0b)
+
+
 ```
 Text2Sql
 ├─ .DS_Store
@@ -83,3 +96,4 @@ Text2Sql
    └─ top_level.txt
 
 ```
+
