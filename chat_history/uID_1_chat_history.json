@@ -1,0 +1,26 @@
+[
+    {
+        "role": "user",
+        "content": "List the products name in descending order, limit 5"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT productName FROM products ORDER BY productName DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY"
+    },
+    {
+        "role": "user",
+        "content": "What was my previous query?"
+    },
+    {
+        "role": "assistant",
+        "content": "Your previous query was to list the names of 5 products in descending order."
+    },
+    {
+        "role": "user",
+        "content": "Sort in desc"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT productName FROM products ORDER BY productName DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY"
+    }
+]

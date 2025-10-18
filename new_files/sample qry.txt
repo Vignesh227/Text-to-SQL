@@ -1,0 +1,174 @@
+Question : 
+
+Summary:	Material mapping from PPC 400X3 to RPC 400X3
+
+From
+Substrate	Count/ply	Fiber Type
+PPC		400X3		G000070
+
+To
+Substrate	Count/ply	Fiber Type
+RPC		400X3		G001298
+
+Answer:
+
+DECLARE @from_thread_id			INT
+DECLARE @to_thread_id			INT
+DECLARE @get_no_of_changes_only	NVARCHAR(1)
+DECLARE @from_group				INT
+DECLARE @to_group				INT
+
+DECLARE	@substrate_code_from NVARCHAR(3)
+DECLARE	@substrate_code_to   NVARCHAR(3)
+DECLARE	@count_ply_from		 NVARCHAR(10)
+DECLARE	@count_ply_to		 NVARCHAR(10)
+DECLARE	@fibre_type_from	 NVARCHAR(20)
+DECLARE @fibre_type_to		 NVARCHAR(20)
+DECLARE @from_article        NVARCHAR(20)
+
+/*
+2993025
+2D93025
+T993025
+
+*/
+SET @substrate_code_from    = 'PPC'
+SET @substrate_code_to      = 'RPC'
+SET	@count_ply_from			= '400X3'
+SET @count_ply_to			= '400X3'
+SET @fibre_type_from		= 'G000070'
+SET @fibre_type_to			= 'G001298'
+SET @from_article			= '2993025'
+--SET @logon_name 			= 'CTCSUPPORT'
+
+
+SELECT	@to_thread_id	= thread_id
+FROM	t_thread
+WHERE	substrate_code	= @substrate_code_to
+AND		count_ply		= @count_ply_to
+AND		fibre_type		= @fibre_type_to 
+
+SELECT	@from_thread_id	= thread_id
+FROM	t_thread
+WHERE	substrate_code	= @substrate_code_from
+AND		count_ply		= @count_ply_from
+AND		fibre_type		= @fibre_type_from
+
+SET @from_group				= 0
+SET @to_group				= 0
+
+/* Just run this query make sure that number of records will get impacted or updated */
+SET NOCOUNT ON
+	
+	DECLARE @include_group_filter BIT = 0
+
+	IF (@from_group > 0 AND @to_group > 0)
+		SET @include_group_filter = 1
+
+	IF @from_article = ''
+		SET @from_article = '%'
+
+	SELECT m.*, th.substrate_code, th.count_ply, th.fibre_type
+	FROM t_material m inner join t_thread th on m.thread_id_fk = th.thread_id
+	WHERE (@include_group_filter = 0 
+			OR (m.group_55_colour_value >= @from_group AND m.group_55_colour_value <= @to_group))
+			AND m.thread_id_fk = @from_thread_id
+			AND m.material_code LIKE @from_article + '-%' 
+
+EXEC dbo.usp_select_record_remap_materials_to_new_thread @from_thread_id, @to_thread_id, @from_group, @to_group, @from_article
+
+/* We need to  run this query to remap the old thread  to new thread for this particular article*/
+
+EXEC dbo.usp_update_remap_materials_to_new_thread @from_thread_id, @to_thread_id, @from_group, @to_group, @from_article, 'CTCSUPPORT'
+
+DECLARE @action_detail	NVARCHAR(3800)
+SET @action_detail = 'Moved materials from thread ' + CONVERT(NVARCHAR, @from_thread_id) + ' to thread ' + CONVERT(NVARCHAR, @to_thread_id) + ' for article ' +   @from_article
+
+EXEC dbo.usp_insert_user_action 'Update', 'Materials', @@SERVERNAME, 'CTCSUPPORT', @action_detail
+
+
+
+Question:
+
+Summary: Material mapping from SSP C130x2 to SSP 130x2 
+
+From
+Substrate	Count/ply	Fiber Type
+SSP		C130x2		G000193
+
+To
+Substrate	Count/ply	Fiber Type
+SSP		130x2		G000192
+
+Answer:
+
+DECLARE	@substrate_code_from NVARCHAR(3)
+DECLARE	@substrate_code_to   NVARCHAR(3)
+DECLARE	@count_ply_from		 NVARCHAR(10)
+DECLARE	@count_ply_to		 NVARCHAR(10)
+DECLARE	@fibre_type_from	 NVARCHAR(20)
+DECLARE @fibre_type_to		 NVARCHAR(20)
+DECLARE @from_article        NVARCHAR(20)
+
+/*
+6320110 --
+6327110 -- 
+6329110 -- 
+6340110 -- 
+6F50110 --
+6R15110 --
+6R40110 --
+*/
+SET @substrate_code_from    = 'SSP'
+SET @substrate_code_to      = 'SSP'
+SET	@count_ply_from			= 'C130x2'
+SET @count_ply_to			= '130x2'
+SET @fibre_type_from		= 'G000193'
+SET @fibre_type_to			= 'G000192'
+SET @from_article			= '6R40110'
+--SET @logon_name 			= 'CTCSUPPORT'
+
+
+SELECT	@to_thread_id	= thread_id
+FROM	t_thread
+WHERE	substrate_code	= @substrate_code_to
+AND		count_ply		= @count_ply_to
+AND		fibre_type		= @fibre_type_to 
+
+SELECT	@from_thread_id	= thread_id
+FROM	t_thread
+WHERE	substrate_code	= @substrate_code_from
+AND		count_ply		= @count_ply_from
+AND		fibre_type		= @fibre_type_from
+
+SET @from_group				= 0
+SET @to_group				= 0
+
+/* Just run this query make sure that number of records will get impacted or updated */
+SET NOCOUNT ON
+	
+	DECLARE @include_group_filter BIT = 0
+
+	IF (@from_group > 0 AND @to_group > 0)
+		SET @include_group_filter = 1
+
+	IF @from_article = ''
+		SET @from_article = '%'
+
+	SELECT m.*, th.substrate_code, th.count_ply, th.fibre_type
+	FROM t_material m inner join t_thread th on m.thread_id_fk = th.thread_id
+	WHERE (@include_group_filter = 0 
+			OR (m.group_55_colour_value >= @from_group AND m.group_55_colour_value <= @to_group))
+			AND m.thread_id_fk = @from_thread_id
+			AND m.material_code LIKE @from_article + '-%' 
+
+EXEC dbo.usp_select_record_remap_materials_to_new_thread @from_thread_id, @to_thread_id, @from_group, @to_group, @from_article
+
+/* We need to  run this query to remap the old thread  to new thread for this particular article*/
+
+EXEC dbo.usp_update_remap_materials_to_new_thread @from_thread_id, @to_thread_id, @from_group, @to_group, @from_article, 'CTCSUPPORT'
+
+DECLARE @action_detail	NVARCHAR(3800)
+SET @action_detail = 'Moved materials from thread ' + CONVERT(NVARCHAR, @from_thread_id) + ' to thread ' + CONVERT(NVARCHAR, @to_thread_id) + ' for article ' +   @from_article
+
+EXEC dbo.usp_insert_user_action 'Update', 'Materials', @@SERVERNAME, 'CTCSUPPORT', @action_detail

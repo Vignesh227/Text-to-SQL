@@ -1,0 +1,10 @@
+[
+    {
+        "role": "user",
+        "content": "hi"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT city, state FROM offices WHERE country = 'USA';"
+    }
+]

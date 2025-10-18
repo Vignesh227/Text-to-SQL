@@ -1,0 +1,26 @@
+[
+    {
+        "role": "user",
+        "content": "List the top 10 countries, where the most customers are from, along with their count"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT TOP 10 country, COUNT(*) AS customer_count FROM customers GROUP BY country ORDER BY customer_count DESC"
+    },
+    {
+        "role": "user",
+        "content": "Sort in desc"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT TOP 10 country, COUNT(*) AS customer_count FROM customers GROUP BY country ORDER BY customer_count DESC"
+    },
+    {
+        "role": "user",
+        "content": "Sort in opp order"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT TOP 10 country, COUNT(*) AS customer_count FROM customers GROUP BY country ORDER BY customer_count ASC"
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "role": "user",
+        "content": "hey there!"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT COUNT(*) FROM t_recipe WHERE recipe_status = 'PREDICTED'"
+    },
+    {
+        "role": "user",
+        "content": "List down the materials details of 200X2X12 countply, BPC substrate and G000704 Fibretype"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT m.material_code, m.shade_name, m.finish_type, m.fastness_type\nFROM t_material AS m\nJOIN t_thread AS t ON m.thread_id_fk = t.thread_id\nWHERE t.count_ply = '200X2X12'\n  AND t.substrate_code = 'BPC'\n  AND t.fibre_type = 'G000704';"
+    },
+    {
+        "role": "user",
+        "content": "Menion some recipes for shade EUR09700?"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT recipe_id, shade_name FROM t_recipe WHERE shade_name = 'EUR09700'"
+    },
+    {
+        "role": "user",
+        "content": "could you do sorting"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT recipe_id, shade_name FROM t_recipe WHERE shade_name = 'EUR09700' ORDER BY recipe_id"
+    },
+    {
+        "role": "user",
+        "content": "What threads have a substrate code of 'BPC'?"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT thread_id, count_ply, fibre_type FROM t_thread WHERE substrate_code = 'BPC'"
+    },
+    {
+        "role": "user",
+        "content": "tell me about u"
+    },
+    {
+        "role": "assistant",
+        "content": "SELECT 'I am a large language model trained on a massive dataset of text and code. I can generate text, translate languages, write different kinds of creative content, and answer your questions in an informative way.'"
+    }
+]

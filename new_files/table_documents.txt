@@ -1,0 +1,353 @@
+Table: t_substrate
+Table description: This table defines the properties of various substrates used in dyeing processes. It stores information like substrate name, code, and any relevant physical characteristics that might influence dye uptake or color appearance. This information is crucial for accurate color calculations and recipe prediction.
+Primary Key: ['substrate_code']
+Foreign Keys: {}
+Columns:
+ - substrate_code: NVARCHAR(3) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - substrate_name: NVARCHAR(30) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - ssp_equivalency: NUMERIC(2, 1), Nullable: False, Default: None, Description: N/A
+ - is_polyester: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - substrate_group_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'substrate_code': 'BPC', 'substrate_name': 'BRAIDS  CORETEX', 'ssp_equivalency': Decimal('1.0'), 'is_polyester': 'T', 'substrate_group_id_fk': 1}
+{'substrate_code': 'BRL', 'substrate_name': 'BRAIDED LINEN', 'ssp_equivalency': Decimal('1.0'), 'is_polyester': 'T', 'substrate_group_id_fk': 1}
+{'substrate_code': 'BRN', 'substrate_name': 'BRAIDED NYLON', 'ssp_equivalency': Decimal('1.0'), 'is_polyester': 'T', 'substrate_group_id_fk': 1}
+{'substrate_code': 'BRP', 'substrate_name': 'BRAIDED POLYESTER', 'ssp_equivalency': Decimal('1.0'), 'is_polyester': 'T', 'substrate_group_id_fk': 1}
+{'substrate_code': 'BY6', 'substrate_name': 'PVA COTTON BLEND', 'ssp_equivalency': Decimal('1.0'), 'is_polyester': 'F', 'substrate_group_id_fk': 1}
+
+
+
+Table: t_thread
+Table description: This table stores details about different thread types used in textile production. Information such as thread name, code, material composition, and standard color values are stored here. This data is essential for color matching and quality control processes.
+Primary Key: ['substrate_code', 'count_ply', 'fibre_type']
+Foreign Keys: {'count_ply': 't_count_ply', 'fibre_type': 't_fibre_type', 'substrate_code': 't_substrate'}
+Columns:
+ - thread_id: INTEGER, Nullable: False, Default: None, Description: N/A
+ - substrate_code: NVARCHAR(3) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - count_ply: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - fibre_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - fibre_mix: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - cluster: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'thread_id': 285, 'substrate_code': 'BPC', 'count_ply': '200X2X12', 'fibre_type': 'G000704', 'fibre_mix': Decimal('69.0000000'), 'cluster': 'N'}
+{'thread_id': 284, 'substrate_code': 'BPC', 'count_ply': '200X3X12', 'fibre_type': 'G000568', 'fibre_mix': Decimal('69.0000000'), 'cluster': 'N'}
+{'thread_id': 251, 'substrate_code': 'BRL', 'count_ply': '19.5x12', 'fibre_type': 'BRAIDS', 'fibre_mix': Decimal('100.0000000'), 'cluster': 'N'}
+{'thread_id': 252, 'substrate_code': 'BRL', 'count_ply': '28x12', 'fibre_type': 'BRAIDS', 'fibre_mix': Decimal('100.0000000'), 'cluster': 'N'}
+{'thread_id': 253, 'substrate_code': 'BRL', 'count_ply': '28x16', 'fibre_type': 'BRAIDS', 'fibre_mix': Decimal('100.0000000'), 'cluster': 'N'}
+
+
+
+Table: t_recipe_dye
+Table description: This table stores the specific dye components of a recipe. It links to the main recipe table (t_recipe) and details the dyes used, their concentrations, and any specific application instructions. This allows for precise control over the dyeing process and ensures consistent color reproduction.
+Primary Key: ['recipe_id_fk', 'stage']
+Foreign Keys: {'dye_code_1': 't_dye', 'dye_code_2': 't_dye', 'dye_code_3': 't_dye', 'dye_triangle_code': 't_dye_triangle_code', 'exception_reason': 't_exception_reason', 'recipe_id_fk': 't_recipe'}
+Columns:
+ - recipe_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - stage: INTEGER, Nullable: False, Default: None, Description: N/A
+ - dye_code_1: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_conc_1: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - dye_code_2: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_conc_2: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - dye_code_3: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_conc_3: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - total_dye_conc: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - dye_triangle_code: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - exception_reason: NVARCHAR(30) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - ternary_ac_id_fk: INTEGER, Nullable: True, Default: None, Description: N/A
+
+Sample data(records):
+{'recipe_id_fk': 168, 'stage': 1, 'dye_code_1': '52000735', 'dye_conc_1': Decimal('0.0100000'), 'dye_code_2': '52000767', 'dye_conc_2': Decimal('0.0300000'), 'dye_code_3': '52000812', 'dye_conc_3': Decimal('0.0200000'), 'total_dye_conc': Decimal('0.0600000'), 'dye_triangle_code': None, 'exception_reason': 'UNKNOWN', 'ternary_ac_id_fk': None}
+{'recipe_id_fk': 169, 'stage': 1, 'dye_code_1': '52000808', 'dye_conc_1': Decimal('0.0295000'), 'dye_code_2': '52000810', 'dye_conc_2': Decimal('0.7589000'), 'dye_code_3': '52106022', 'dye_conc_3': Decimal('0.6881000'), 'total_dye_conc': Decimal('1.4765000'), 'dye_triangle_code': 'GD16N', 'exception_reason': None, 'ternary_ac_id_fk': 62082}
+{'recipe_id_fk': 170, 'stage': 1, 'dye_code_1': '52000803', 'dye_conc_1': Decimal('0E-7'), 'dye_code_2': '52000813', 'dye_conc_2': Decimal('0.0029000'), 'dye_code_3': '52106022', 'dye_conc_3': Decimal('0.0003000'), 'total_dye_conc': Decimal('0.0032000'), 'dye_triangle_code': 'GD9N', 'exception_reason': None, 'ternary_ac_id_fk': 75444}
+{'recipe_id_fk': 30139, 'stage': 1, 'dye_code_1': '52000803', 'dye_conc_1': Decimal('0.0181000'), 'dye_code_2': '52000810', 'dye_conc_2': Decimal('0.0073000'), 'dye_code_3': '52000813', 'dye_conc_3': Decimal('0.0104000'), 'total_dye_conc': Decimal('0.0358000'), 'dye_triangle_code': 'ED1', 'exception_reason': None, 'ternary_ac_id_fk': None}
+{'recipe_id_fk': 171, 'stage': 1, 'dye_code_1': '52000811', 'dye_conc_1': Decimal('0.0005000'), 'dye_code_2': '52000813', 'dye_conc_2': Decimal('0.0063000'), 'dye_code_3': '52106022', 'dye_conc_3': Decimal('0.0013000'), 'total_dye_conc': Decimal('0.0081000'), 'dye_triangle_code': 'GD7N', 'exception_reason': None, 'ternary_ac_id_fk': None}
+
+
+
+Table: t_recipe_multi_dye
+Table description: This table likely handles recipes that involve multiple dye applications or stages. It stores information about the sequence of dye additions, concentrations at each stage, and any specific parameters for each dyeing step. This is important for complex dyeing processes where color is built up in layers.
+Primary Key: ['recipe_id_fk', 'stage', 'sequence']
+Foreign Keys: {'dye_code': 't_dye', 'recipe_id_fk': 't_recipe'}
+Columns:
+ - recipe_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - stage: INTEGER, Nullable: False, Default: None, Description: N/A
+ - sequence: INTEGER, Nullable: False, Default: None, Description: N/A
+ - dye_code: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_conc: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+
+
+
+Table: t_manual_chem_format
+Table description: This table defines the format for manually entered chemical additions to a recipe. It specifies the units of measure (e.g., grams, percentages) and any formatting rules for inputting chemical data. This ensures consistency and accuracy in recording manual additions.
+Primary Key: ['recipe_id_fk', 'record_number']
+Foreign Keys: {'recipe_id_fk': 't_recipe'}
+Columns:
+ - recipe_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - record_number: INTEGER, Nullable: False, Default: None, Description: N/A
+ - record_type: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - stage: INTEGER, Nullable: False, Default: None, Description: N/A
+ - sequence: INTEGER, Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'recipe_id_fk': 124, 'record_number': 0, 'record_type': 'D', 'stage': 1, 'sequence': 1}
+{'recipe_id_fk': 124, 'record_number': 1, 'record_type': 'D', 'stage': 1, 'sequence': 2}
+{'recipe_id_fk': 124, 'record_number': 2, 'record_type': 'D', 'stage': 1, 'sequence': 3}
+{'recipe_id_fk': 124, 'record_number': 3, 'record_type': 'C', 'stage': 1, 'sequence': 1}
+{'recipe_id_fk': 124, 'record_number': 4, 'record_type': 'C', 'stage': 1, 'sequence': 2}
+
+
+
+Table: t_manual_chem_conc
+Table description: This table stores the concentration values for manually added chemicals in a recipe. It links to the t_manual_chem_format table to interpret the units and format of the concentration data. This allows for precise control over the chemical additions during the dyeing process.
+Primary Key: ['recipe_id_fk', 'stage', 'sequence']
+Foreign Keys: {'chem_code': 't_chemical', 'chem_units': 't_conc_units', 'recipe_id_fk': 't_recipe'}
+Columns:
+ - recipe_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - stage: INTEGER, Nullable: False, Default: None, Description: N/A
+ - sequence: INTEGER, Nullable: False, Default: None, Description: N/A
+ - chem_code: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - chem_conc: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - chem_units: NVARCHAR(4) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'recipe_id_fk': 124, 'stage': 1, 'sequence': 1, 'chem_code': '52105227', 'chem_conc': Decimal('1.3000000'), 'chem_units': 'g/l'}
+{'recipe_id_fk': 124, 'stage': 1, 'sequence': 2, 'chem_code': '52001475', 'chem_conc': Decimal('1.5000000'), 'chem_units': 'ml/l'}
+{'recipe_id_fk': 124, 'stage': 1, 'sequence': 3, 'chem_code': '52107113', 'chem_conc': Decimal('1.0000000'), 'chem_units': 'g/l'}
+{'recipe_id_fk': 179, 'stage': 1, 'sequence': 1, 'chem_code': '52105227', 'chem_conc': Decimal('1.3000000'), 'chem_units': 'g/l'}
+{'recipe_id_fk': 179, 'stage': 1, 'sequence': 2, 'chem_code': '52001475', 'chem_conc': Decimal('1.5000000'), 'chem_units': 'ml/l'}
+
+
+
+Table: t_manual_chem_text
+Table description: This table stores descriptive text associated with manually added chemicals. This might include notes about the chemical's function, specific handling instructions, or any other relevant information. This provides additional context and guidance for operators.
+Primary Key: ['recipe_id_fk', 'stage', 'sequence']
+Foreign Keys: {'recipe_id_fk': 't_recipe'}
+Columns:
+ - recipe_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - stage: INTEGER, Nullable: False, Default: None, Description: N/A
+ - sequence: INTEGER, Nullable: False, Default: None, Description: N/A
+ - text: NVARCHAR(80) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'recipe_id_fk': 124, 'stage': 1, 'sequence': 1, 'text': 'Drop1'}
+{'recipe_id_fk': 124, 'stage': 1, 'sequence': 2, 'text': 'Drop2'}
+{'recipe_id_fk': 124, 'stage': 1, 'sequence': 3, 'text': 'Drop3'}
+{'recipe_id_fk': 179, 'stage': 1, 'sequence': 1, 'text': 'Drop1'}
+{'recipe_id_fk': 179, 'stage': 1, 'sequence': 2, 'text': 'Drop2'}
+
+
+
+Table: t_manual_chem_group
+Table description: This table groups manually added chemicals into categories or families. This allows for easier management and organization of chemical data, especially when dealing with a large number of chemicals.
+Primary Key: ['recipe_id_fk', 'stage', 'sequence']
+Foreign Keys: {'recipe_id_fk': 't_recipe'}
+Columns:
+ - recipe_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - stage: INTEGER, Nullable: False, Default: None, Description: N/A
+ - sequence: INTEGER, Nullable: False, Default: None, Description: N/A
+ - group_name: NVARCHAR(30) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'recipe_id_fk': 124, 'stage': 1, 'sequence': 1, 'group_name': 'DYE BATH LUBRICATION'}
+{'recipe_id_fk': 179, 'stage': 1, 'sequence': 1, 'group_name': 'DYE BATH LUBRICATION'}
+{'recipe_id_fk': 206, 'stage': 1, 'sequence': 0, 'group_name': 'DYE BATH LUBRICATION'}
+{'recipe_id_fk': 216, 'stage': 1, 'sequence': 0, 'group_name': 'DYE BATH LUBRICATION'}
+{'recipe_id_fk': 221, 'stage': 1, 'sequence': 1, 'group_name': 'DYE BATH LUBRICATION'}
+
+
+
+Table: t_dyehouse_setting
+Table description: This table stores configuration settings specific to a particular dyehouse or production facility. This might include information about equipment, processes, or local preferences that influence the dyeing process. This ensures that recipes are tailored to the specific conditions of each dyehouse.
+Primary Key: ['dyehouse_code', 'setting_name', 'setting_scope']
+Foreign Keys: {}
+Columns:
+ - dyehouse_code: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - setting_name: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - setting_value: NVARCHAR(2000) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - setting_scope: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'dyehouse_code': 'ROMBPU', 'setting_name': '3DGraphLabelsDescriptive', 'setting_value': 'FALSE', 'setting_scope': 'ASBDCTLJ1RHFC2'}
+{'dyehouse_code': 'ROMBPU', 'setting_name': '3DGraphLabelsDescriptive', 'setting_value': 'TRUE', 'setting_scope': 'ASIDBGLFZ4XPH2'}
+{'dyehouse_code': 'ROMBPU', 'setting_name': '3DGraphLabelsDescriptive', 'setting_value': 'FALSE', 'setting_scope': 'BARWIARNIA'}
+{'dyehouse_code': 'ROMBPU', 'setting_name': '3DGraphLabelsDescriptive', 'setting_value': 'FALSE', 'setting_scope': 'DFM-LXP-BTUNDE'}
+{'dyehouse_code': 'ROMBPU', 'setting_name': '3DGraphLabelsDescriptive', 'setting_value': 'FALSE', 'setting_scope': 'EROODHDEM00N5F2'}
+
+
+
+Table: t_dye_class
+Table description: This table categorizes dyes based on their chemical properties or application methods. This allows for easier searching and filtering of dyes, and can also be used for reporting and analysis.
+Primary Key: ['dye_class_code']
+Foreign Keys: {'unit': 't_conc_units', 'substrate_code': 't_substrate'}
+Columns:
+ - dye_class_code: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_class_name: NVARCHAR(30) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_class_number: SMALLINT, Nullable: False, Default: None, Description: N/A
+ - substrate_code: NVARCHAR(3) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_class_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - unit: NVARCHAR(4) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - date_time: DATETIME, Nullable: False, Default: None, Description: N/A
+ - cluster: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - lower_conc_boundary: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - upper_conc_boundary: NUMERIC(19, 7), Nullable: False, Default: None, Description: N/A
+ - fuzzy_lower_conc_boundary: NUMERIC(19, 7), Nullable: True, Default: None, Description: N/A
+ - fuzzy_upper_conc_boundary: NUMERIC(19, 7), Nullable: True, Default: None, Description: N/A
+ - dye_type_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - substrate_desc_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - depth_of_shade_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - thread_supply_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - dye_class_category_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+
+Sample data(records):
+{'dye_class_code': '*NONE*', 'dye_class_name': 'Blank dyeclass', 'dye_class_number': 0, 'substrate_code': 'SSP', 'dye_class_type': 'Single Fibre', 'unit': '%', 'date_time': datetime.datetime(1980, 1, 1, 0, 0), 'cluster': 'N', 'lower_conc_boundary': Decimal('0E-7'), 'upper_conc_boundary': Decimal('0E-7'), 'fuzzy_lower_conc_boundary': Decimal('0E-7'), 'fuzzy_upper_conc_boundary': Decimal('0E-7'), 'dye_type_code': None, 'substrate_desc_code': None, 'depth_of_shade_code': None, 'thread_supply_code': None, 'dye_class_category_code': None}
+{'dye_class_code': 'BPC_AC_M', 'dye_class_name': 'BRAIDS CORETEX MAIN', 'dye_class_number': 299, 'substrate_code': 'BPC', 'dye_class_type': 'Corespun Main', 'unit': '%', 'date_time': datetime.datetime(2018, 8, 14, 13, 15, 58), 'cluster': 'N', 'lower_conc_boundary': Decimal('0E-7'), 'upper_conc_boundary': Decimal('1.0000000'), 'fuzzy_lower_conc_boundary': Decimal('0E-7'), 'fuzzy_upper_conc_boundary': Decimal('1.5000000'), 'dye_type_code': '_', 'substrate_desc_code': 'A', 'depth_of_shade_code': 'C', 'thread_supply_code': '_', 'dye_class_category_code': ''}
+{'dye_class_code': 'BPC_AC_SUB', 'dye_class_name': 'BRAIDS CORETEX SUB', 'dye_class_number': 300, 'substrate_code': 'BPC', 'dye_class_type': 'Corespun Subsidiary', 'unit': '%', 'date_time': datetime.datetime(2018, 8, 14, 13, 32, 26), 'cluster': 'N', 'lower_conc_boundary': Decimal('0E-7'), 'upper_conc_boundary': Decimal('5.0000000'), 'fuzzy_lower_conc_boundary': Decimal('0E-7'), 'fuzzy_upper_conc_boundary': Decimal('6.0000000'), 'dye_type_code': '-', 'substrate_desc_code': 'A', 'depth_of_shade_code': 'C', 'thread_supply_code': '_', 'dye_class_category_code': ''}
+{'dye_class_code': 'BPCPGMG', 'dye_class_name': 'BRAIDS PROCION MED DARK SUBSID', 'dye_class_number': 302, 'substrate_code': 'BPC', 'dye_class_type': 'Corespun Subsidiary', 'unit': '%', 'date_time': datetime.datetime(2018, 9, 5, 12, 56, 31), 'cluster': 'N', 'lower_conc_boundary': Decimal('0.5000000'), 'upper_conc_boundary': Decimal('100.0000000'), 'fuzzy_lower_conc_boundary': Decimal('0.4000000'), 'fuzzy_upper_conc_boundary': Decimal('0E-7'), 'dye_type_code': 'P', 'substrate_desc_code': 'G', 'depth_of_shade_code': 'M', 'thread_supply_code': 'G', 'dye_class_category_code': ''}
+{'dye_class_code': 'BPCPGPG', 'dye_class_name': 'BRAIDS REACTIVE PROCION PALE ', 'dye_class_number': 301, 'substrate_code': 'BPC', 'dye_class_type': 'Corespun Subsidiary', 'unit': '%', 'date_time': datetime.datetime(2018, 9, 5, 12, 51, 54), 'cluster': 'N', 'lower_conc_boundary': Decimal('0E-7'), 'upper_conc_boundary': Decimal('0.5000000'), 'fuzzy_lower_conc_boundary': Decimal('0E-7'), 'fuzzy_upper_conc_boundary': Decimal('0.6000000'), 'dye_type_code': 'P', 'substrate_desc_code': 'G', 'depth_of_shade_code': 'P', 'thread_supply_code': 'G', 'dye_class_category_code': ''}
+
+
+
+Table: t_recipe
+Table description: This table stores the main information about a dyeing recipe. It includes the recipe name, description, target color, and links to other tables for details about dyes, chemicals, and processes. This serves as the central repository for all recipe-related data.
+Primary Key: ['recipe_id']
+Foreign Keys: {'dye_class_code_1': 't_dye_class', 'dye_class_code_2': 't_dye_class', 'dyed_from': 't_dyed_from', 'dyeing_method': 't_dyeing_method', 'fastness_type': 't_fastness_type', 'finish_type': 't_finish_type', 'producer': 't_producer', 'recipe_status': 't_recipe_status', 'recipe_type_code': 't_recipe_type', 'standard_type': 't_standard_type', 'thread_group_id_fk': 't_thread_group'}
+Columns:
+ - recipe_id: INTEGER, Nullable: False, Default: None, Description: N/A
+ - shade_name: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - thread_group_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - producer: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - finish_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - fastness_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - recipe_type_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - justified_shade_name: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - chem_generation_type: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_class_code_1: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_class_code_2: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - update_date: DATETIME, Nullable: False, Default: None, Description: N/A
+ - saved_date: DATETIME, Nullable: False, Default: None, Description: N/A
+ - dyeing_method: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dyed_from: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - recipe_status: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - standard_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - cluster: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - updated_by: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - update_method: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - update_reason: NVARCHAR(100) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - prescreening_action_id_fk: INTEGER, Nullable: True, Default: None, Description: N/A
+ - recipe_version_no: INTEGER, Nullable: True, Default: None, Description: N/A
+ - recipe_version_no_minor: INTEGER, Nullable: True, Default: None, Description: N/A
+
+Sample data(records):
+{'recipe_id': 1, 'shade_name': 'R0760', 'thread_group_id_fk': 27, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': 'R               0760', 'chem_generation_type': 'A', 'dye_class_code_1': 'PPCDHPG', 'dye_class_code_2': '*NONE*', 'update_date': datetime.datetime(2010, 1, 25, 10, 48, 16, 547000), 'saved_date': datetime.datetime(2010, 1, 25, 10, 48, 16, 547000), 'dyeing_method': '0151', 'dyed_from': 'GREY', 'recipe_status': "1'ST LAB TO BULK", 'standard_type': 'SPECIALS UNLUB', 'cluster': 'N', 'updated_by': None, 'update_method': None, 'update_reason': None, 'prescreening_action_id_fk': None, 'recipe_version_no': 1, 'recipe_version_no_minor': 0}
+{'recipe_id': 2, 'shade_name': 'R0760', 'thread_group_id_fk': 22, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': 'R               0760', 'chem_generation_type': 'A', 'dye_class_code_1': 'PPCDHPG', 'dye_class_code_2': '*NONE*', 'update_date': datetime.datetime(2010, 1, 25, 10, 48, 16, 547000), 'saved_date': datetime.datetime(2010, 1, 25, 10, 48, 16, 547000), 'dyeing_method': '0151', 'dyed_from': 'GREY', 'recipe_status': "1'ST LAB TO BULK", 'standard_type': 'SPECIALS UNLUB', 'cluster': 'N', 'updated_by': None, 'update_method': None, 'update_reason': None, 'prescreening_action_id_fk': None, 'recipe_version_no': 1, 'recipe_version_no_minor': 0}
+{'recipe_id': 3, 'shade_name': 'ATLEM102', 'thread_group_id_fk': 30, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': 'ATLEM            102', 'chem_generation_type': 'A', 'dye_class_code_1': 'SSPDNMG', 'dye_class_code_2': '*NONE*', 'update_date': datetime.datetime(2010, 1, 25, 10, 55, 26, 243000), 'saved_date': datetime.datetime(2010, 1, 25, 10, 55, 26, 243000), 'dyeing_method': '0116', 'dyed_from': 'GREY', 'recipe_status': "1'ST LAB TO BULK", 'standard_type': 'ATLAS-SSP', 'cluster': 'N', 'updated_by': None, 'update_method': None, 'update_reason': None, 'prescreening_action_id_fk': None, 'recipe_version_no': 1, 'recipe_version_no_minor': 0}
+{'recipe_id': 4, 'shade_name': 'GCBC4649', 'thread_group_id_fk': 36, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': 'GCBC            4649', 'chem_generation_type': 'A', 'dye_class_code_1': 'TXPDNPG', 'dye_class_code_2': '*NONE*', 'update_date': datetime.datetime(2021, 8, 4, 13, 48, 36, 663000), 'saved_date': datetime.datetime(2021, 8, 4, 13, 48, 36, 663000), 'dyeing_method': '0101', 'dyed_from': 'GREY', 'recipe_status': 'PREDICTED', 'standard_type': 'GCB-TXP', 'cluster': 'N', 'updated_by': 'ejanosi', 'update_method': 'Predict (Refined)', 'update_reason': '', 'prescreening_action_id_fk': 0, 'recipe_version_no': 3, 'recipe_version_no_minor': 0}
+{'recipe_id': 5, 'shade_name': '9700G', 'thread_group_id_fk': 30, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': '9700G               ', 'chem_generation_type': 'A', 'dye_class_code_1': 'SSPDNDGV', 'dye_class_code_2': '*NONE*', 'update_date': datetime.datetime(2023, 8, 29, 17, 31, 54, 840000), 'saved_date': datetime.datetime(2023, 8, 29, 17, 31, 54, 840000), 'dyeing_method': '0118', 'dyed_from': 'GREY', 'recipe_status': 'COPIED', 'standard_type': 'SPECIAL UNLUB SSP', 'cluster': 'N', 'updated_by': 'ltunde', 'update_method': 'Edit Recipe', 'update_reason': 'COLOUR DIFFERENCE TOO HIGH', 'prescreening_action_id_fk': 0, 'recipe_version_no': 17, 'recipe_version_no_minor': 0}
+
+
+
+Table: t_recipe_history
+Table description: This table tracks changes made to recipes over time. It records who made the changes, when they were made, and the specific modifications. This provides an audit trail for quality control and process improvement.
+Primary Key: ['recipe_history_id']
+Foreign Keys: {}
+Columns:
+ - recipe_history_id: INTEGER, Nullable: False, Default: None, Description: N/A
+ - recipe_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - shade_name: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - thread_group_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - producer: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - finish_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - fastness_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - recipe_type_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - justified_shade_name: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - chem_generation_type: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_class_code_1: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dye_class_code_2: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - update_date: DATETIME, Nullable: False, Default: None, Description: N/A
+ - saved_date: DATETIME, Nullable: False, Default: None, Description: N/A
+ - dyeing_method: NVARCHAR(10) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - dyed_from: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - recipe_status: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - standard_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - cluster: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - updated_by: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - update_method: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - update_reason: NVARCHAR(100) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - prescreening_action_id_fk: INTEGER, Nullable: True, Default: None, Description: N/A
+ - recipe_version_no: INTEGER, Nullable: True, Default: None, Description: N/A
+ - recipe_version_no_minor: INTEGER, Nullable: True, Default: None, Description: N/A
+
+Sample data(records):
+{'recipe_history_id': 1, 'recipe_id_fk': 32735, 'shade_name': 'EUR09700', 'thread_group_id_fk': 17, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'Y', 'justified_shade_name': 'EUR            09700', 'chem_generation_type': 'A', 'dye_class_code_1': 'PCCDPDG', 'dye_class_code_2': 'PCCVGDG', 'update_date': datetime.datetime(2010, 1, 6, 9, 50, 19, 510000), 'saved_date': datetime.datetime(2010, 1, 6, 9, 50, 19, 510000), 'dyeing_method': '0530', 'dyed_from': 'UNKNOWN', 'recipe_status': 'REPRO', 'standard_type': 'EURO-PCC', 'cluster': 'N', 'updated_by': '?', 'update_method': '?', 'update_reason': '?', 'prescreening_action_id_fk': None, 'recipe_version_no': 3, 'recipe_version_no_minor': 0}
+{'recipe_history_id': 2, 'recipe_id_fk': 19248, 'shade_name': 'EUR09700', 'thread_group_id_fk': 25, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': 'EUR            09700', 'chem_generation_type': 'A', 'dye_class_code_1': 'PPCDPDG', 'dye_class_code_2': '*NONE*', 'update_date': datetime.datetime(2010, 1, 6, 11, 1, 20, 407000), 'saved_date': datetime.datetime(2010, 1, 6, 11, 1, 20, 407000), 'dyeing_method': '0116', 'dyed_from': 'GREY', 'recipe_status': 'MANUALLY CORRECTED', 'standard_type': 'EURO-PPC', 'cluster': 'N', 'updated_by': '?', 'update_method': '?', 'update_reason': '?', 'prescreening_action_id_fk': None, 'recipe_version_no': 1, 'recipe_version_no_minor': 0}
+{'recipe_history_id': 4, 'recipe_id_fk': 27900, 'shade_name': '09457', 'thread_group_id_fk': 17, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': '               09457', 'chem_generation_type': 'A', 'dye_class_code_1': 'PCCDPPG', 'dye_class_code_2': 'PCCVGPG', 'update_date': datetime.datetime(2010, 1, 7, 21, 43, 36, 160000), 'saved_date': datetime.datetime(2010, 1, 7, 21, 43, 36, 160000), 'dyeing_method': '0266', 'dyed_from': 'GREY', 'recipe_status': 'MANUALLY CORRECTED', 'standard_type': 'SPECIALS UNLUB', 'cluster': 'N', 'updated_by': '?', 'update_method': '?', 'update_reason': '?', 'prescreening_action_id_fk': None, 'recipe_version_no': 2, 'recipe_version_no_minor': 0}
+{'recipe_history_id': 5, 'recipe_id_fk': 32735, 'shade_name': 'EUR09700', 'thread_group_id_fk': 17, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'Y', 'justified_shade_name': 'EUR            09700', 'chem_generation_type': 'A', 'dye_class_code_1': 'PCCDPDG', 'dye_class_code_2': 'PCCVGDG', 'update_date': datetime.datetime(2010, 1, 8, 12, 43, 46, 803000), 'saved_date': datetime.datetime(2010, 1, 8, 12, 43, 46, 803000), 'dyeing_method': '0530', 'dyed_from': 'UNKNOWN', 'recipe_status': 'REPRO', 'standard_type': 'EURO-PCC', 'cluster': 'N', 'updated_by': '?', 'update_method': '?', 'update_reason': '?', 'prescreening_action_id_fk': None, 'recipe_version_no': 5, 'recipe_version_no_minor': 0}
+{'recipe_history_id': 8, 'recipe_id_fk': 28837, 'shade_name': 'I7910', 'thread_group_id_fk': 2, 'producer': 'BULK', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'justified_shade_name': 'I               7910', 'chem_generation_type': 'A', 'dye_class_code_1': 'CFPDPPG', 'dye_class_code_2': '*NONE*', 'update_date': datetime.datetime(2010, 1, 12, 13, 18, 43, 457000), 'saved_date': datetime.datetime(2010, 1, 12, 13, 18, 43, 457000), 'dyeing_method': '0121', 'dyed_from': 'GREY', 'recipe_status': 'MANUALLY CORRECTED', 'standard_type': 'CFP UNLUB', 'cluster': 'N', 'updated_by': '?', 'update_method': '?', 'update_reason': '?', 'prescreening_action_id_fk': None, 'recipe_version_no': 2, 'recipe_version_no_minor': 0}
+
+
+
+Table: t_thread_group
+Table description: This table groups similar threads together based on their dyeing characteristics. This is used for efficient feedback calculations, as it allows the system to apply color corrections to a group of threads rather than individually.
+Primary Key: ['thread_group_id']
+Foreign Keys: {}
+Columns:
+ - thread_group_id: INTEGER, Nullable: False, Default: None, Description: N/A
+ - thread_group: NVARCHAR(40) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - substrate_code: NVARCHAR(3) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - cluster: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'thread_group_id': 1, 'thread_group': 'GRAL', 'substrate_code': 'CFP', 'cluster': 'N'}
+{'thread_group_id': 2, 'thread_group': 'GRAL1', 'substrate_code': 'CFP', 'cluster': 'N'}
+{'thread_group_id': 3, 'thread_group': 'GRAL2', 'substrate_code': 'CFP', 'cluster': 'N'}
+{'thread_group_id': 4, 'thread_group': 'GRAL3', 'substrate_code': 'CFP', 'cluster': 'N'}
+{'thread_group_id': 5, 'thread_group': 'LFP', 'substrate_code': 'LFP', 'cluster': 'N'}
+
+
+
+Table: t_thread_group_details
+Table description: This table stores the specific threads that belong to each thread group. It links to the t_thread_group table and provides the details of the individual threads within each group.
+Primary Key: ['thread_group_id_fk', 'thread_id_fk']
+Foreign Keys: {'thread_id_fk': 't_thread', 'thread_group_id_fk': 't_thread_group'}
+Columns:
+ - thread_group_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - thread_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'thread_group_id_fk': 1, 'thread_id_fk': 105}
+{'thread_group_id_fk': 1, 'thread_id_fk': 124}
+{'thread_group_id_fk': 1, 'thread_id_fk': 128}
+{'thread_group_id_fk': 2, 'thread_id_fk': 125}
+{'thread_group_id_fk': 2, 'thread_id_fk': 233}
+
+
+
+Table: t_material
+Table description: This table stores information about various materials used in the textile production process. This might include raw materials, intermediate products, or finished goods. This data is used for inventory management, production planning, and cost tracking.
+Primary Key: ['material_code']
+Foreign Keys: {'thread_id_fk': 't_thread'}
+Columns:
+ - material_code: NVARCHAR(80) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - thread_id_fk: INTEGER, Nullable: False, Default: None, Description: N/A
+ - shade_name: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - finish_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - fastness_type: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - recipe_type_code: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: False, Default: None, Description: N/A
+ - status: NVARCHAR(1) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - logon_name: NVARCHAR(20) COLLATE "SQL_Latin1_General_CP1_CI_AS", Nullable: True, Default: None, Description: N/A
+ - mapped_date: DATETIME, Nullable: True, Default: None, Description: N/A
+ - group_55_colour_value: INTEGER, Nullable: False, Default: None, Description: N/A
+
+Sample data(records):
+{'material_code': '0135040-P0100', 'thread_id_fk': 1428, 'shade_name': 'P0100', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'status': 'M', 'logon_name': 'abenedek', 'mapped_date': datetime.datetime(2021, 7, 6, 6, 55, 49, 797000), 'group_55_colour_value': 72}
+{'material_code': '0322030-00228', 'thread_id_fk': 1515, 'shade_name': '00228', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'status': 'M', 'logon_name': 'szdalma', 'mapped_date': datetime.datetime(2023, 3, 16, 16, 24, 3, 103000), 'group_55_colour_value': 46}
+{'material_code': '0322030-00293', 'thread_id_fk': 1515, 'shade_name': '00293', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'status': 'M', 'logon_name': 'miza', 'mapped_date': datetime.datetime(2022, 9, 13, 10, 20, 4, 163000), 'group_55_colour_value': 12}
+{'material_code': '0322030-00473', 'thread_id_fk': 1515, 'shade_name': '00473', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'status': 'M', 'logon_name': 'szdalma', 'mapped_date': datetime.datetime(2022, 9, 13, 10, 20, 4, 163000), 'group_55_colour_value': 10}
+{'material_code': '0322030-00511', 'thread_id_fk': 1515, 'shade_name': '00511', 'finish_type': 'NORMAL', 'fastness_type': 'NORMAL', 'recipe_type_code': 'D', 'status': 'M', 'logon_name': 'sangella', 'mapped_date': datetime.datetime(2022, 9, 13, 10, 20, 4, 163000), 'group_55_colour_value': 46}
+
+
+
