@@ -1,11 +1,85 @@
-# Home Page
-![1 home page new](https://github.com/user-attachments/assets/aa810092-3b8d-42fa-a2a5-8cd9b3faea3f)
-![2 what is](https://github.com/user-attachments/assets/ac54ba4f-15fa-4741-9062-3cbe4776f2c3)
-![3 sample](https://github.com/user-attachments/assets/e7129e22-f535-4b2a-898d-9e80f97c96fa)
+```
+Text2Sql
+├─ .DS_Store
+├─ .env
+├─ README.md
+├─ app
+│  ├─ frontend
+│  │  ├─ static
+│  │  │  └─styles.css
+│  │  └─ templates
+│  │     └─index.html
+│  ├─ main.py
+│  └─ security.py
+├─ notebooks
+├─ pyproject.toml
+├─ tests
+├─ text2sql
+│  ├─ .DS_Store
+│  ├─ __init__.py
+│  ├─ __pycache__
+│  │  ├─ __init__.cpython-310.pyc
+│  │  ├─ sql_parser.cpython-310.pyc
+│  │  └─ table_context.cpython-310.pyc
+│  ├─ config.py
+│  ├─ core
+│  │  ├─ __pycache__
+│  │  │  ├─ __init__.cpython-310.pyc
+│  │  │  ├─ config.cpython-310.pyc
+│  │  │  └─ run.cpython-310.pyc
+│  │  ├─ ai_model
+│  │  │  ├─ __init__.py
+│  │  │  ├─ __pycache__
+│  │  │  │  ├─ __init__.cpython-310.pyc
+│  │  │  │  ├─ model_config.cpython-310.pyc
+│  │  │  │  └─ models.cpython-310.pyc
+│  │  │  ├─ model_config.py
+│  │  │  └─ models.py
+│  │  ├─ database
+│  │  │  ├─ __init__.py
+│  │  │  ├─ __pycache__
+│  │  │  │  ├─ __init__.cpython-310.pyc
+│  │  │  │  ├─ connection.cpython-310.pyc
+│  │  │  │  ├─ database_config.cpython-310.pyc
+│  │  │  │  └─ setup.cpython-310.pyc
+│  │  │  ├─ connection.py
+│  │  │  ├─ database_config.py
+│  │  │  └─ setup.py
+│  │  ├─ index
+│  │  │  ├─ __init__.py
+│  │  │  ├─ __pycache__
+│  │  │  │  └─ base_indexer.cpython-310.pyc
+│  │  │  ├─ base_indexer.py
+│  │  │  ├─ chroma_indexer.py
+│  │  │  ├─ object_index.py
+│  │  │  └─ sample_query_index.py
+│  │  ├─ pipeline
+│  │  │  ├─ __init__.py
+│  │  │  ├─ __pycache__
+│  │  │  │  ├─ __init__.cpython-310.pyc
+│  │  │  │  ├─ events.cpython-310.pyc
+│  │  │  │  └─ workflows.cpython-310.pyc
+│  │  │  ├─ events.py
+│  │  │  └─ workflows.py
+│  │  └─ retriever
+│  │     └─ object_retriever.py
+│  ├─ logger.py
+│  ├─ prompts
+│  │  ├─ __init__.py
+│  │  ├─ __pycache__
+│  │  │  ├─ __init__.cpython-310.pyc
+│  │  │  └─ sql_prompt.cpython-310.pyc
+│  │  ├─ sql_prompt.py
+│  │  └─ templates
+│  │     ├─ response_template.py
+│  │     └─ sql_template.py
+│  ├─ run.py
+│  ├─ sql_parser.py
+│  └─ table_context.py
+└─ text2sql.egg-info
+   ├─ PKG-INFO
+   ├─ SOURCES.txt
+   ├─ dependency_links.txt
+   └─ top_level.txt
 
-# Chat Page
-![4 chat page](https://github.com/user-attachments/assets/0104e2aa-77c2-4bbe-b360-8cb50cb8aff1)
-![5 hi there](https://github.com/user-attachments/assets/ab987b99-d2ea-4ee6-ab87-00e485c12324)
-![6 recipe](https://github.com/user-attachments/assets/e22a94ed-1c58-4e66-ab52-e0b6f6aa3af1)
-![7 recipe 2](https://github.com/user-attachments/assets/40530510-6996-48dc-a42e-5c4b48c40806)
-![8 recipe history chat](https://github.com/user-attachments/assets/f8a83268-5ce6-40ca-9fcd-d2f9178966de)
+```

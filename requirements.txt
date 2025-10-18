@@ -1,0 +1,16 @@
+llama-index
+llama-index-llms-gemini
+llama-index-llms-vertex
+llama-index-embeddings-gemini
+llama-index-embeddings-vertex
+llama-index-vector-stores-chroma
+ipython
+google-generativeai
+sqlalchemy
+chromadb==0.5.18
+pyodbc
+pydantic-settings
+fastapi
+uvicorn
+jinja2
+markdown
